@@ -1,5 +1,6 @@
 import { useDeleteUserMutation } from "@/redux/api";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Button } from "../ui/button";
 
 const DeleteUserModal = ({ user, onClose }) => {
   const [deleteUser, { isLoading }] = useDeleteUserMutation();
@@ -19,23 +20,24 @@ const DeleteUserModal = ({ user, onClose }) => {
     <Dialog open onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete User</DialogTitle>
+          <DialogTitle className="font-bold">Delete User</DialogTitle>
         </DialogHeader>
         <div className="mt-4 space-y-4">
           <p>
             Are you sure you want to delete <strong>{user.name}</strong>?
           </p>
-          <div className="flex justify-end gap-4">
-            <button onClick={onClose} className="px-4 py-2 bg-gray-300 rounded">
+          <div className="flex justify-end gap-4 w-full">
+            <Button variant="outline" onClick={onClose}>
               Cancel
-            </button>
-            <button
+            </Button>
+
+            <Button
+              variant="destructive"
               onClick={handleDelete}
               disabled={isLoading}
-              className="px-4 py-2 bg-red-600 text-white rounded"
             >
               {isLoading ? "Deleting..." : "Delete"}
-            </button>
+            </Button>
           </div>
         </div>
       </DialogContent>

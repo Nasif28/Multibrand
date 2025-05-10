@@ -16,7 +16,7 @@ const ViewUserModal = ({ user, onClose }) => {
     <Dialog open onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-lg font-semibold">
+          <DialogTitle className="text-lg font-bold">
             User Details
           </DialogTitle>
         </DialogHeader>
@@ -42,7 +42,9 @@ const ViewUserModal = ({ user, onClose }) => {
             <span className="font-medium">Status:</span>
             <Badge
               variant={user.status ? "default" : "outline"}
-              className={user.status ? "bg-green-500" : "bg-gray-400"}
+              className={`${
+                user.status ? "bg-green-500" : "bg-gray-400"
+              } px-2 py-1 text-xs rounded`}
             >
               {user.status ? "Active" : "Inactive"}
             </Badge>

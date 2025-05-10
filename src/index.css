@@ -118,3 +118,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+.maxContainer {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.myContainer {
+  max-width: 1480px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}

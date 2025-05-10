@@ -9,12 +9,14 @@ import { store } from "./redux/store";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </ThemeProvider>
+    <div className="maxContainer">
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Provider store={store}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      </ThemeProvider>
+    </div>
   </StrictMode>
 );

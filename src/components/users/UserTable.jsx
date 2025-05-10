@@ -65,7 +65,9 @@ const UserTable = () => {
               >
                 <td className="px-4 py-2">{user.name}</td>
                 <td className="px-4 py-2">{user.email}</td>
-                <td className="px-4 py-2">{user.phone}</td>
+                <td className="px-4 py-2">
+                  {user.phone?.split("x")[0].trim()}
+                </td>
                 <td className="px-4 py-2">
                   {user.dob
                     ? new Date(user.dob).toLocaleDateString("en-US", {
@@ -128,7 +130,7 @@ const UserTable = () => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-end items-center gap-2 mt-4">
+      <div className="flex justify-center items-center gap-2 mt-4">
         <Button
           variant="outline"
           size="sm"
