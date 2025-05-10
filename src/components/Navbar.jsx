@@ -12,14 +12,14 @@ const Navbar = () => {
 
   return (
     <header className="w-full bg-white dark:bg-gray-900 shadow-sm border-b dark:border-gray-800">
-      <div className=" py-3 flex items-center justify-between">
+      <div className="px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img src="/images/logo.gif" alt="Logo" className="h-12 w-auto" />
         </div>
 
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          
+
           <Button variant="destructive" onClick={handleLogout}>
             Logout
           </Button>

@@ -1,17 +1,32 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
 import { useEffect } from "react";
 import { useCreateUserMutation, useUpdateUserMutation } from "@/redux/api";
 
 const userSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email(),
-  phone: z.string().min(10),
-  dob: z.string(),
-  status: z.enum(["Active", "Inactive"]),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().regex(/^\d{10,15}$/, "Phone must be 10–15 digits"),
+  dob: z.string().min(1, "Date of birth is required"),
+  status: z.boolean(),
 });
 
 const UserFormModal = ({ user, onClose }) => {
@@ -23,6 +38,8 @@ const UserFormModal = ({ user, onClose }) => {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(userSchema),
@@ -31,12 +48,18 @@ const UserFormModal = ({ user, onClose }) => {
       email: "",
       phone: "",
       dob: "",
-      status: "Active",
+      status: true,
     },
   });
 
   useEffect(() => {
-    if (isEdit) reset(user);
+    if (isEdit) {
+      reset({
+        ...user,
+        dob: user?.dob?.split("T")[0] ?? "",
+        status: !!user?.status,
+      });
+    }
   }, [user]);
 
   const onSubmit = async (data) => {
@@ -54,64 +77,69 @@ const UserFormModal = ({ user, onClose }) => {
 
   return (
     <Dialog open onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Edit User" : "Add New User"}</DialogTitle>
+          <DialogTitle className="font-bold">{isEdit ? "Edit User" : "Add New User"}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
-          <div>
-            <input
-              {...register("name")}
-              placeholder="Name"
-              className="w-full p-2 border dark:bg-gray-800"
-            />
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-2">
+            <Label>Name</Label>
+            <Input {...register("name")} placeholder="Enter full name" />
             {errors.name && (
-              <p className="text-red-500 text-sm">{errors.name.message}</p>
+              <p className="text-sm text-red-500">{errors.name.message}</p>
             )}
           </div>
-          <div>
-            <input
-              {...register("email")}
-              placeholder="Email"
-              className="w-full p-2 border dark:bg-gray-800"
-            />
+
+          <div className="space-y-2">
+            <Label>Email</Label>
+            <Input {...register("email")} placeholder="Enter email" />
             {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
+              <p className="text-sm text-red-500">{errors.email.message}</p>
             )}
           </div>
-          <div>
-            <input
-              {...register("phone")}
-              placeholder="Phone"
-              className="w-full p-2 border dark:bg-gray-800"
-            />
+
+          <div className="space-y-2">
+            <Label>Phone</Label>
+            <Input {...register("phone")} placeholder="Enter phone number" />
             {errors.phone && (
-              <p className="text-red-500 text-sm">{errors.phone.message}</p>
+              <p className="text-sm text-red-500">{errors.phone.message}</p>
             )}
           </div>
-          <div>
-            <input
-              type="date"
-              {...register("dob")}
-              className="w-full p-2 border dark:bg-gray-800"
-            />
+
+          <div className="space-y-2">
+            <Label>Date of Birth</Label>
+            <Input type="date" {...register("dob")} />
+            {errors.dob && (
+              <p className="text-sm text-red-500">{errors.dob.message}</p>
+            )}
           </div>
-          <div>
-            <select
-              {...register("status")}
-              className="w-full p-2 border dark:bg-gray-800"
+
+          <div className="space-y-2">
+            <Label>Status</Label>
+            <Select
+              value={watch("status") === true ? "true" : "false"}
+              onValueChange={(value) => setValue("status", value === "true")}
             >
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
+              <SelectTrigger>
+                <SelectValue placeholder="Select status" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="true">Active</SelectItem>
+                <SelectItem value="false">Inactive</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {errors.status && (
+              <p className="text-sm text-red-500">{errors.status.message}</p>
+            )}
           </div>
+
           <div className="text-right">
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded"
-            >
+            <Button className="w-full" type="submit">
               {isEdit ? "Update" : "Create"}
-            </button>
+            </Button>
           </div>
         </form>
       </DialogContent>

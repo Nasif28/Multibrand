@@ -66,7 +66,16 @@ const UserTable = () => {
                 <td className="px-4 py-2">{user.name}</td>
                 <td className="px-4 py-2">{user.email}</td>
                 <td className="px-4 py-2">{user.phone}</td>
-                <td className="px-4 py-2">{user.dob}</td>
+                <td className="px-4 py-2">
+                  {user.dob
+                    ? new Date(user.dob).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })
+                    : "-"}
+                </td>
+
                 <td className="px-4 py-2">
                   {user.status ? (
                     <span className="inline-flex items-center gap-1 px-2 py-1 text-xs text-green-600 bg-green-100 rounded dark:bg-green-800 dark:text-green-300">
@@ -82,7 +91,7 @@ const UserTable = () => {
                 </td>
                 <td className="px-4 py-2 text-center space-x-2">
                   <Button
-                     variant="outline"
+                    variant="outline"
                     size="icon"
                     onClick={() => {
                       setSelectedUser(user);
@@ -102,7 +111,7 @@ const UserTable = () => {
                     <Pencil className="w-4 h-4 text-blue-600" />
                   </Button>
                   <Button
-                     variant="outline"
+                    variant="outline"
                     size="icon"
                     onClick={() => {
                       setSelectedUser(user);
