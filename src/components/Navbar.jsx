@@ -11,10 +11,10 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full bg-white dark:bg-gray-900 shadow-sm border-b dark:border-gray-800">
-      <div className="px-4 py-3 flex items-center justify-between">
+    <header className="w-full bg-gray-300 dark:bg-gray-700  dark:border-gray-800">
+      <div className="px-10 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src="/images/logo.gif" alt="Logo" className="h-12 w-auto" />
+          <img src="/images/logo.gif" alt="Logo" className="h-16 w-auto" />
         </div>
 
         <div className="flex items-center gap-4">
