@@ -1,12 +1,192 @@
-# React + Vite
+# 📊 Admin Dashboard – User Analytics System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive admin dashboard built with **React**, **Redux Toolkit**, **RTK Query**, and **Tailwind CSS**, featuring user management (CRUD), secure authentication, and real-time data visualizations powered by **MockAPI**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Demo
 
-## Expanding the ESLint configuration
+**🔗 [View Live (if deployed)](https://multibrand.onrender.com)**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Features
+
+- 🔐 **Authentication System** (Login/Logout)
+- 👥 **User Module**
+
+  - Create, View, Edit, Delete users via modals
+  - Validations using Zod + React Hook Form
+  - Persistent backend data (MockAPI)
+
+- 📊 **Dynamic Dashboard**
+
+  - **Bar Chart**: Users by birth year
+  - **Pie Chart**: Active vs. inactive users
+  - **Donut Chart**: Email domain breakdown
+  - **Line Chart**: User creation trend
+
+- 🧭 **Sidebar Navigation** with active link highlights
+- 🌗 **Dark Mode** toggle (with localStorage persistence)
+- ⚙️ **Global State Management** via Redux Toolkit
+- 🌐 **API Integration** via RTK Query (no Axios needed)
+- 🧼 **Toast Notifications** using Sonner
+- 🧱 **Component Library**: ShadCN UI (Radix-based, fully accessible)
+- 💻 **Responsive Design** – mobile/tablet/desktop ready
+
+---
+
+## 🧰 Tech Stack
+
+| Tech             | Purpose                           |
+| ---------------- | --------------------------------- |
+| React            | Component-based UI                |
+| Vite             | Fast dev environment              |
+| Redux Toolkit    | State management                  |
+| RTK Query        | Data fetching + caching           |
+| Tailwind CSS     | Utility-first styling             |
+| React Router DOM | Client-side routing               |
+| Zod              | Schema-based form validation      |
+| React Hook Form  | Form handling                     |
+| Recharts         | Data visualizations               |
+| ShadCN/UI        | Headless, themeable UI components |
+| Sonner           | Toast notifications               |
+| MockAPI.io       | RESTful backend simulation        |
+
+---
+
+## 📂 Folder Structure
+
+```
+src/
+├── components/         # Reusable UI components
+│   ├── charts/         # All chart cards (bar, pie, line, donut)
+│   └── users/          # User modals and table
+├── auth/
+│   └── login/          # Login form and auth slice
+├── layouts/            # Protected layout (Navbar + Sidebar)
+├── pages/              # Dashboard, Users, Login
+├── redux/              # Store and RTK Query services
+├── routes/             # Routing structure
+├── lib/                # Zod schemas, constants
+├── App.jsx
+├── main.jsx
+```
+
+---
+
+## 📦 Installation
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/Nasif28/Multibrand.git
+cd multibrand
+
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+or
+npm install --legacy-peer-deps
+```
+
+3. **Start development server:**
+
+```bash
+npm run dev
+```
+
+4. **Build for production:**
+
+```bash
+npm run build
+```
+
+---
+
+## ✅ API Setup
+
+Using [MockAPI](https://mockapi.io):
+
+- Create a project and add a **`users`** resource
+- Fields:
+
+  - `name`: string
+  - `email`: string
+  - `phone`: string
+  - `dob`: string (YYYY-MM-DD)
+  - `status`: boolean (`true` or `false`)
+
+- Replace `baseUrl` in `redux/api.js` with your MockAPI URL
+
+---
+
+## 🔐 Authentication
+
+> 🧪 **Test Credentials**
+> Email: `admin@admin.com`
+> Password: `admin123`
+
+- Uses Redux to persist token
+- Protected routes (Dashboard/Users) redirect to login if not authenticated
+
+---
+
+## ✨ Charts Overview
+
+| Chart Type  | Purpose                              |
+| ----------- | ------------------------------------ |
+| Bar Chart   | Number of users by **birth year**    |
+| Pie Chart   | **Active vs. Inactive** status split |
+| Donut Chart | Breakdown of **email domains**       |
+| Line Chart  | Simulated user creation trend        |
+
+---
+
+## 🔐 Authentication
+
+- Dummy login with hardcoded credentials or minimal validation
+- Uses Redux to persist token
+- Protected routes (Dashboard/Users) redirect if not logged in
+
+---
+
+## 🌗 Dark Mode
+
+- Toggle from Navbar
+- Respects system settings on first load
+- Saves preference in `localStorage`
+
+---
+
+## 📢 Toast Notifications
+
+Implemented using [Sonner](https://sonner.emilkowal.dev/):
+
+- Success/failure on:
+
+  - Create/Edit/Delete user
+  - Login/logout
+
+- Non-blocking, beautiful alerts
+
+---
+
+## 📌 Future Improvements
+
+- Add pagination to users table
+- Integrate real authentication API
+- Add search/filter on users
+- Upload avatars per user
+- Export data (CSV, PDF)
+
+---
+
+## 📄 License
+
+MIT © \[Nasif Jihan]
+
+---
