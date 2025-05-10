@@ -1,6 +1,7 @@
 import { useDeleteUserMutation } from "@/redux/api";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 const DeleteUserModal = ({ user, onClose }) => {
   const [deleteUser, { isLoading }] = useDeleteUserMutation();
@@ -8,9 +9,10 @@ const DeleteUserModal = ({ user, onClose }) => {
   const handleDelete = async () => {
     try {
       await deleteUser(user.id).unwrap();
-      onClose(); // Close after deletion
+      toast.success("User deleted successfully!");
+      onClose();
     } catch (err) {
-      console.error("Delete error:", err);
+      toast.error("Delete error:", err);
     }
   };
 

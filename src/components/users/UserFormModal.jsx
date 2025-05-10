@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useEffect } from "react";
 import { useCreateUserMutation, useUpdateUserMutation } from "@/redux/api";
+import { toast } from "sonner";
 
 const userSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -66,12 +67,14 @@ const UserFormModal = ({ user, onClose }) => {
     try {
       if (isEdit) {
         await updateUser({ id: user.id, ...data }).unwrap();
+        toast.success("User updated successfully!");
       } else {
         await createUser(data).unwrap();
+        toast.success("User created successfully!");
       }
       onClose();
     } catch (err) {
-      console.error("Error saving user:", err);
+      toast.error("Error saving user:", err);
     }
   };
 
@@ -79,7 +82,9 @@ const UserFormModal = ({ user, onClose }) => {
     <Dialog open onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="font-bold">{isEdit ? "Edit User" : "Add New User"}</DialogTitle>
+          <DialogTitle className="font-bold">
+            {isEdit ? "Edit User" : "Add New User"}
+          </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

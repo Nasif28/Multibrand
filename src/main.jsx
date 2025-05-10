@@ -6,6 +6,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { BrowserRouter } from "react-router";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")).render(
         <Provider store={store}>
           <BrowserRouter>
             <App />
+             <Toaster richColors position="top-right" />
           </BrowserRouter>
         </Provider>
       </ThemeProvider>
