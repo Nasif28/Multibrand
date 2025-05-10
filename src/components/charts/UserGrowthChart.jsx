@@ -1,21 +1,14 @@
-import { Card, CardHeader, CardContent, CardTitle } from '../ui/card';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from 'chart.js';
-
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const UserGrowthChart = () => {
-  const chartData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-    datasets: [
-      {
-        label: 'New Users',
-        data: [5, 10, 4, 8, 12], // You can later generate real data from user.dob or createdAt
-        borderColor: '#10b981',
-        tension: 0.4,
-      },
-    ],
-  };
+  const chartData = [
+    { month: 'Jan', users: 4 },
+    { month: 'Feb', users: 7 },
+    { month: 'Mar', users: 10 },
+    { month: 'Apr', users: 6 },
+    { month: 'May', users: 12 },
+  ];
 
   return (
     <Card>
@@ -23,7 +16,14 @@ const UserGrowthChart = () => {
         <CardTitle>User Growth Over Time</CardTitle>
       </CardHeader>
       <CardContent>
-        <Line data={chartData} />
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={chartData}>
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="users" stroke="#10b981" />
+          </LineChart>
+        </ResponsiveContainer>
       </CardContent>
     </Card>
   );

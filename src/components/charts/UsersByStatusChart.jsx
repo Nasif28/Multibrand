@@ -1,28 +1,17 @@
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Bar } from 'react-chartjs-2';
-import { useGetUsersQuery } from '../../redux/api/userApi';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import { useGetUsersQuery } from '@/redux/api';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
 
-ChartJS.register(BarElement, CategoryScale, LinearScale);
 
 const UsersByStatusChart = () => {
   const { data: users = [] } = useGetUsersQuery();
 
-  const countByStatus = users.reduce((acc, user) => {
-    acc[user.status] = (acc[user.status] || 0) + 1;
-    return acc;
-  }, {});
-
-  const chartData = {
-    labels: Object.keys(countByStatus),
-    datasets: [
-      {
-        label: 'Users by Status',
-        data: Object.values(countByStatus),
-        backgroundColor: ['#3b82f6', '#ef4444'],
-      },
-    ],
-  };
+  const chartData = Object.entries(
+    users.reduce((acc, user) => {
+      acc[user.status] = (acc[user.status] || 0) + 1;
+      return acc;
+    }, {})
+  ).map(([status, count]) => ({ status, count }));
 
   return (
     <Card>
@@ -30,7 +19,14 @@ const UsersByStatusChart = () => {
         <CardTitle>Users by Status</CardTitle>
       </CardHeader>
       <CardContent>
-        <Bar data={chartData} />
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={chartData}>
+            <XAxis dataKey="status" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="count" fill="#3b82f6" />
+          </BarChart>
+        </ResponsiveContainer>
       </CardContent>
     </Card>
   );
