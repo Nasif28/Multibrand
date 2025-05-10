@@ -6,7 +6,7 @@ A responsive admin dashboard built with **React**, **Redux Toolkit**, **RTK Quer
 
 ## 🌐 Live Demo
 
-**🔗 [View Live (if deployed)](https://multibrand.onrender.com)**
+**🔗 [View Live](https://multibrand.onrender.com)**
 
 ---
 
@@ -187,6 +187,6 @@ Implemented using [Sonner](https://sonner.emilkowal.dev/):
 
 ## 📄 License
 
-MIT © \[Nasif Jihan]
+MIT © \Nasif Jihan
 
 ---
