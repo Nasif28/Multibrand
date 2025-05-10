@@ -1,20 +1,31 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../auth/authSlice";
 import ThemeToggle from "./ThemeToggle";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const dispatch = useDispatch();
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
-    <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
-      <h1 className="text-xl font-semibold">Dashboard</h1>
-      <div className="flex gap-4 items-center">
-        <ThemeToggle />
-        <button onClick={() => dispatch(logout())} className="text-red-500">
-          Logout
-        </button>
+    <header className="w-full bg-white dark:bg-gray-900 shadow-sm border-b dark:border-gray-800">
+      <div className=" py-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <img src="/images/logo.gif" alt="Logo" className="h-12 w-auto" />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          
+          <Button variant="destructive" onClick={handleLogout}>
+            Logout
+          </Button>
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 
