@@ -7,7 +7,7 @@ import Users from "./pages/Users";
 
 const App = () => {
   return (
-    <div className="myContainer">
+    <div >
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />

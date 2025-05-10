@@ -6,7 +6,7 @@ import React from "react";
 
 const Dashboard = () => {
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className="grid gap-3 md:grid-cols-2">
       <UsersByYearBarChart />
       <UserStatusPieChart />
       <EmailDomainDonutChart />
