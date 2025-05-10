@@ -1,16 +1,18 @@
-import StatusRatioPieChart from '@/components/charts/StatusRatioPieChart'
-import UserGrowthChart from '@/components/charts/UserGrowthChart'
-import UsersByStatusChart from '@/components/charts/UsersByStatusChart'
-import React from 'react'
+import EmailDomainDonutChart from "@/components/charts/EmailDomainDonutChart";
+import UsersByYearBarChart from "@/components/charts/UsersByYearBarChart";
+import UserStatusPieChart from "@/components/charts/UserStatusPieChart";
+import UserTrendLineChart from "@/components/charts/UserTrendLineChart";
+import React from "react";
 
 const Dashboard = () => {
   return (
-  <div className="grid gap-6 md:grid-cols-2">
-      <UsersByStatusChart />
-      <UserGrowthChart />
-      <StatusRatioPieChart />
+    <div className="grid gap-6 md:grid-cols-2">
+      <UsersByYearBarChart />
+      <UserStatusPieChart />
+      <EmailDomainDonutChart />
+      <UserTrendLineChart />
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

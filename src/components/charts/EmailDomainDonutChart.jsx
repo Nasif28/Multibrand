@@ -1,23 +1,28 @@
+
 import { useGetUsersQuery } from "@/redux/api";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#34d399", "#f87171", "#facc15"];
+const COLORS = ["#3b82f6", "#f59e0b", "#8b5cf6", "#f43f5e", "#10b981"];
 
-const StatusRatioPieChart = () => {
+const EmailDomainDonutChart = () => {
   const { data: users = [] } = useGetUsersQuery();
 
-  const chartData = Object.entries(
-    users.reduce((acc, user) => {
-      acc[user.status] = (acc[user.status] || 0) + 1;
-      return acc;
-    }, {})
-  ).map(([status, value]) => ({ name: status, value }));
+  const domainCounts = users.reduce((acc, user) => {
+    const domain = user.email.split("@")[1];
+    acc[domain] = (acc[domain] || 0) + 1;
+    return acc;
+  }, {});
+
+  const chartData = Object.entries(domainCounts).map(([domain, count]) => ({
+    name: domain,
+    value: count,
+  }));
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Status Distribution</CardTitle>
+        <CardTitle>Email Domain Distribution</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
@@ -26,12 +31,12 @@ const StatusRatioPieChart = () => {
               data={chartData}
               dataKey="value"
               nameKey="name"
+              innerRadius={60}
               outerRadius={100}
-              fill="#8884d8"
               label
             >
-              {chartData.map((_, index) => (
-                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              {chartData.map((_, i) => (
+                <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
             </Pie>
             <Tooltip />
@@ -42,4 +47,4 @@ const StatusRatioPieChart = () => {
   );
 };
 
-export default StatusRatioPieChart;
+export default EmailDomainDonutChart;
