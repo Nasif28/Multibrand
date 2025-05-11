@@ -36,6 +36,13 @@ const SidePanel = () => {
     },
   ];
 
+  const linkClass = ({ isActive }) =>
+    `block font-bold px-4 py-2 rounded transition ${
+      isActive
+        ? "bg-blue-500 text-white"
+        : "hover:bg-gray-100 dark:hover:bg-gray-800"
+    }`;
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="flex items-center justify-center h-20 transition-all duration-300">
@@ -54,7 +61,7 @@ const SidePanel = () => {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.url} className="font-bold">
+                    <NavLink to={item.url} className={linkClass}>
                       <item.icon />
                       <span>{item.title}</span>
                     </NavLink>
