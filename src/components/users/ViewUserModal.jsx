@@ -26,18 +26,22 @@ const ViewUserModal = ({ user, onClose }) => {
             <span className="font-medium">Name:</span>
             <span>{user.name}</span>
           </div>
+
           <div className="flex justify-between">
             <span className="font-medium">Email:</span>
             <span>{user.email}</span>
           </div>
+
           <div className="flex justify-between">
             <span className="font-medium">Phone:</span>
             <span>{user.phone}</span>
           </div>
+
           <div className="flex justify-between">
             <span className="font-medium">Date of Birth:</span>
             <span>{formattedDob}</span>
           </div>
+          
           <div className="flex justify-between items-center">
             <span className="font-medium">Status:</span>
             <Badge

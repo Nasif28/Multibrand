@@ -1,23 +1,7 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from "@/components/ui/sheet";
-import { NavLink } from "react-router";
 import { useDispatch } from "react-redux";
 import { logout } from "../auth/authSlice";
 import { Button } from "@/components/ui/button";
-import {
-  Calendar,
-  Home,
-  Inbox,
-  LayoutDashboardIcon,
-  LogOut,
-  Search,
-  Settings,
-  Users,
-} from "lucide-react";
+import { LayoutDashboardIcon, LogOut, Users } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -29,16 +13,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
   useSidebar,
 } from "./ui/sidebar";
 
 const SidePanel = () => {
   const dispatch = useDispatch();
-const { state } = useSidebar();
-const collapsed = state === "collapsed";
-console.log("Sidebar collapsed:", collapsed);
-
+  const { state } = useSidebar();
+  const collapsed = state === "collapsed";
+  console.log("Sidebar collapsed:", collapsed);
 
   const items = [
     {
@@ -53,17 +35,14 @@ console.log("Sidebar collapsed:", collapsed);
     },
   ];
 
-
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="flex items-center justify-center h-20 transition-all duration-300">
-     <img
-  src={collapsed === true ? "/fabicon.png" : "/images/logo.gif"}
-  alt="Logo"
-  className={(collapsed === true ? "h-6 w-6" : "h-16 w-auto")}
-/>
-
-
+        <img
+          src={collapsed === true ? "/fabicon.png" : "/images/logo.gif"}
+          alt="Logo"
+          className={collapsed === true ? "h-6 w-6" : "h-16 w-auto"}
+        />
       </SidebarHeader>
 
       <SidebarContent>

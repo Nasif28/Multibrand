@@ -26,10 +26,12 @@ const DeleteUserModal = ({ user, onClose }) => {
         <DialogHeader>
           <DialogTitle className="font-bold">Delete User</DialogTitle>
         </DialogHeader>
+
         <div className="mt-4 space-y-4">
           <p>
             Are you sure you want to delete <strong>{user.name}</strong>?
           </p>
+          
           <div className="flex justify-end gap-4 w-full">
             <Button variant="outline" onClick={onClose}>
               Cancel

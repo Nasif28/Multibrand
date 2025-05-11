@@ -31,7 +31,7 @@ const UserTable = () => {
   if (isLoading) return <p className="text-center py-4">Loading...</p>;
 
   return (
-    <div className="overflow-x-auto">
+    <div >
       <div className="flex justify-between items-center mb-4">
         <span className="text-xl font-bold text-gray-800 dark:text-white">
           User Management
@@ -47,7 +47,8 @@ const UserTable = () => {
         </Button>
       </div>
 
-      <div className="overflow-auto rounded-md border dark:border-gray-700 max-h-[70vh]">
+     <div className="w-full max-w-full overflow-auto rounded-md border dark:border-gray-700 max-h-[70vh]">
+
         <table className="min-w-full text-sm text-left">
           <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
             <tr>
@@ -59,6 +60,7 @@ const UserTable = () => {
               <th className="px-4 py-2 border-b text-center">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {paginatedUsers.map((user) => (
               <tr
@@ -93,6 +95,7 @@ const UserTable = () => {
                     </span>
                   )}
                 </td>
+
                 <td className="px-4 flex py-2 text-center space-x-2">
                   <Button
                     variant="outline"
@@ -104,6 +107,7 @@ const UserTable = () => {
                   >
                     <Eye className="w-4 h-4 text-green-600" />
                   </Button>
+
                   <Button
                     variant="outline"
                     size="icon"
@@ -114,6 +118,7 @@ const UserTable = () => {
                   >
                     <Pencil className="w-4 h-4 text-blue-600" />
                   </Button>
+
                   <Button
                     variant="outline"
                     size="icon"
@@ -131,7 +136,6 @@ const UserTable = () => {
         </table>
       </div>
 
-      {/* Pagination Controls */}
       <div className="flex justify-center items-center gap-2 mt-4">
         <Button
           variant="outline"
@@ -154,7 +158,6 @@ const UserTable = () => {
         </Button>
       </div>
 
-      {/* Modals */}
       {modalType === "edit" && (
         <UserFormModal user={selectedUser} onClose={() => setModalType(null)} />
       )}

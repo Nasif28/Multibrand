@@ -40,6 +40,7 @@ const UsersByYearBarChart = ({ users }) => {
       <CardHeader>
         <CardTitle>Users by Birth Year</CardTitle>
       </CardHeader>
+      
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={chartData}>

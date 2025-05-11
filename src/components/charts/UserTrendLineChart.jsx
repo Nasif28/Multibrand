@@ -19,6 +19,7 @@ const UserTrendLineChart = ({ users }) => {
       <CardHeader>
         <CardTitle>User Creation Trend</CardTitle>
       </CardHeader>
+      
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData}>
