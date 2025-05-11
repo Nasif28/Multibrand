@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router";
+import { Navigate, Outlet } from "react-router"; // ✅ use 'react-router-dom'
 import Navbar from "@/components/Navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import SidePanel from "@/components/SidePanel";
@@ -11,17 +11,17 @@ const ProtectedLayout = () => {
 
   return (
     <div className="flex min-h-screen bg-white dark:bg-gray-900">
-        <SidebarProvider>
+      <SidebarProvider>
         <SidePanel />
 
-         <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1">
           <Navbar />
           <main className="p-4 overflow-y-auto">
             <Outlet />
           </main>
         </div>
-    </SidebarProvider>
-      </div>
+      </SidebarProvider>
+    </div>
   );
 };
 

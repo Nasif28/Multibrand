@@ -13,6 +13,7 @@ import {
   Home,
   Inbox,
   LayoutDashboardIcon,
+  LogOut,
   Search,
   Settings,
   Users,
@@ -28,15 +29,16 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
+  useSidebar,
 } from "./ui/sidebar";
 
 const SidePanel = () => {
   const dispatch = useDispatch();
+const { state } = useSidebar();
+const collapsed = state === "collapsed";
+console.log("Sidebar collapsed:", collapsed);
 
-  // const navLinks = [
-  //   { to: "/dashboard", label: "📊 Dashboard" },
-  //   { to: "/users", label: "👤 Users" },
-  // ];
 
   const items = [
     {
@@ -51,15 +53,20 @@ const SidePanel = () => {
     },
   ];
 
+
   return (
-    <Sidebar>
-      <SidebarHeader className="flex items-center ">
-        <div className="flex items-center gap-2">
-          <img src="/images/logo.gif" alt="Logo" className="h-16 w-auto" />
-        </div>
+    <Sidebar collapsible="icon">
+      <SidebarHeader className="flex items-center justify-center h-20 transition-all duration-300">
+     <img
+  src={collapsed === true ? "/fabicon.png" : "/images/logo.gif"}
+  alt="Logo"
+  className={(collapsed === true ? "h-6 w-6" : "h-16 w-auto")}
+/>
+
+
       </SidebarHeader>
 
-      <SidebarContent className={"px-4"}>
+      <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="mb-4">Admin Panel</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -79,13 +86,13 @@ const SidePanel = () => {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className={"px-4"}>
+      <SidebarFooter>
         <Button
           variant="destructive"
           className="w-full justify-start"
           onClick={() => dispatch(logout())}
         >
-          🚪 Logout
+          <LogOut /> Logout
         </Button>
       </SidebarFooter>
     </Sidebar>
