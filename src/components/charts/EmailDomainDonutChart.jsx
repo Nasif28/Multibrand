@@ -1,4 +1,3 @@
-import { useGetUsersQuery } from "@/redux/api";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
@@ -17,9 +16,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const EmailDomainDonutChart = () => {
-  const { data: users = [] } = useGetUsersQuery();
-
+const EmailDomainDonutChart = ({ users }) => {
   const domainCounts = users.reduce((acc, user) => {
     const domain = user.email.split("@")[1];
     acc[domain] = (acc[domain] || 0) + 1;

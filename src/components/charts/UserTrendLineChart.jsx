@@ -1,5 +1,3 @@
-
-import { useGetUsersQuery } from "@/redux/api";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import {
   LineChart,
@@ -10,9 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const UserTrendLineChart = () => {
-  const { data: users = [] } = useGetUsersQuery();
-
+const UserTrendLineChart = ({ users }) => {
   const chartData = users.map((user, index) => ({
     index: index + 1,
     name: user.name,

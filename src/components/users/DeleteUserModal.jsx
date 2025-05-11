@@ -2,6 +2,7 @@ import { useDeleteUserMutation } from "@/redux/api";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import {  userBroadcastChannel } from "@/lib/broadcast";
 
 const DeleteUserModal = ({ user, onClose }) => {
   const [deleteUser, { isLoading }] = useDeleteUserMutation();
@@ -11,6 +12,7 @@ const DeleteUserModal = ({ user, onClose }) => {
       await deleteUser(user.id).unwrap();
       toast.success("User deleted successfully!");
       onClose();
+      userBroadcastChannel.postMessage("userUpdated");
     } catch (err) {
       toast.error("Delete error:", err);
     }

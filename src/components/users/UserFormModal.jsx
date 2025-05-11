@@ -21,6 +21,7 @@ import { z } from "zod";
 import { useEffect } from "react";
 import { useCreateUserMutation, useUpdateUserMutation } from "@/redux/api";
 import { toast } from "sonner";
+import { userBroadcastChannel } from "@/lib/broadcast";
 
 const userSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -72,9 +73,11 @@ const UserFormModal = ({ user, onClose }) => {
         await createUser(data).unwrap();
         toast.success("User created successfully!");
       }
+
+      userBroadcastChannel.postMessage("userUpdated");
       onClose();
     } catch (err) {
-      toast.error("Error saving user:", err);
+      toast.error("Error saving user.");
     }
   };
 

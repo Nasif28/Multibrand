@@ -1,7 +1,5 @@
-import { useGetUsersQuery } from "@/redux/api";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-
 const COLORS = ["#10b981", "#ef4444"];
 
 const CustomTooltip = ({ active, payload }) => {
@@ -18,9 +16,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const UserStatusPieChart = () => {
-  const { data: users = [] } = useGetUsersQuery();
-
+const UserStatusPieChart = ({ users }) => {
   const data = [
     { name: "Active", value: users.filter((u) => u.status === true).length },
     { name: "Inactive", value: users.filter((u) => u.status === false).length },
@@ -34,7 +30,6 @@ const UserStatusPieChart = () => {
 
       <CardContent>
         <div className="flex flex-col md:flex-row md:items-center">
-          {/* Chart on the left */}
           <div className="w-full md:w-2/3">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>

@@ -1,4 +1,3 @@
-import { useGetUsersQuery } from "@/redux/api";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import {
   BarChart,
@@ -12,7 +11,6 @@ import {
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload || !payload.length) return null;
-
   return (
     <div className="bg-white dark:bg-gray-900 p-3 rounded border shadow text-sm">
       <p className="font-semibold text-gray-800 dark:text-white">
@@ -25,9 +23,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-const UsersByYearBarChart = () => {
-  const { data: users = [] } = useGetUsersQuery();
-
+const UsersByYearBarChart = ({ users }) => {
   const yearCount = users.reduce((acc, user) => {
     const year = new Date(user.dob).getFullYear();
     acc[year] = (acc[year] || 0) + 1;
