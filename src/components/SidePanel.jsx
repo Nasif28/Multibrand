@@ -15,6 +15,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "./ui/sidebar";
+import { Link } from "react-router";
 
 const SidePanel = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const SidePanel = () => {
     },
     {
       title: "Users",
-      url: "/Users",
+      url: "/users",
       icon: Users,
     },
   ];
@@ -53,10 +54,10 @@ const SidePanel = () => {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url} className="font-bold">
+                    <Link href={item.url} className="font-bold">
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
