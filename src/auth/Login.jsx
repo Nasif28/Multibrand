@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "./authSlice";
 import { useNavigate } from "react-router";
@@ -9,11 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
-
-const schema = z.object({
-  email: z.string().email({ message: "Invalid email" }),
-  password: z.string().min(6, { message: "Minimum 6 characters" }),
-});
+import { loginSchema } from "@/lib/zodSchemas";
 
 const VALID_EMAIL = "admin@admin.com";
 const VALID_PASSWORD = "admin123";
@@ -28,12 +23,14 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = (data) => {
     if (data.email === VALID_EMAIL && data.password === VALID_PASSWORD) {
-      dispatch(loginSuccess({ user: { email: data.email }, token: "fake-token" }));
+      dispatch(
+        loginSuccess({ user: { email: data.email }, token: "fake-token" })
+      );
       navigate("/dashboard");
     } else {
       setError("Invalid email or password");
@@ -51,14 +48,29 @@ const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" placeholder="Enter your email" {...register("email")} />
-              {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+              <Input
+                id="email"
+                placeholder="Enter your email"
+                {...register("email")}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="Enter password" {...register("password")} />
-              {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             {error && <p className="text-red-600 text-sm">{error}</p>}

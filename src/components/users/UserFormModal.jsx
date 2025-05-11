@@ -17,19 +17,11 @@ import {
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useEffect } from "react";
 import { useCreateUserMutation, useUpdateUserMutation } from "@/redux/api";
 import { toast } from "sonner";
 import { userBroadcastChannel } from "@/lib/broadcast";
-
-const userSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().regex(/^\d{10,15}$/, "Phone must be 10–15 digits"),
-  dob: z.string().min(1, "Date of birth is required"),
-  status: z.boolean(),
-});
+import { userSchema } from "@/lib/zodSchemas";
 
 const UserFormModal = ({ user, onClose }) => {
   const isEdit = !!user;
