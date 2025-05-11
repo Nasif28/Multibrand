@@ -14,9 +14,9 @@ const ProtectedLayout = () => {
       <SidebarProvider>
         <SidePanel />
 
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 min-w-0">
           <Navbar />
-          <main className="p-4 overflow-y-auto">
+          <main className="p-4 overflow-y-auto ">
             <Outlet />
           </main>
         </div>

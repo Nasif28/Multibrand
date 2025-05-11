@@ -12,6 +12,14 @@ import {
   CircleCheck,
   CircleX,
 } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const USERS_PER_PAGE = 10;
 
@@ -31,112 +39,107 @@ const UserTable = () => {
   if (isLoading) return <p className="text-center py-4">Loading...</p>;
 
   return (
-    <div >
-      <div className="flex justify-between items-center mb-4">
-        <span className="text-xl font-bold text-gray-800 dark:text-white">
+    <div className="space-y-4">
+      {/* Fixed Header */}
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-white">
           User Management
-        </span>
+        </h2>
         <Button
           onClick={() => {
             setSelectedUser(null);
             setModalType("edit");
           }}
         >
-          <PlusCircle className="h-4 w-4" />
+          <PlusCircle className="h-4 w-4 mr-1" />
           Add User
         </Button>
       </div>
 
-     <div className="w-full max-w-full overflow-auto rounded-md border dark:border-gray-700 max-h-[70vh]">
-
-        <table className="min-w-full text-sm text-left">
-          <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-            <tr>
-              <th className="px-4 py-2 border-b">Name</th>
-              <th className="px-4 py-2 border-b">Email</th>
-              <th className="px-4 py-2 border-b">Phone</th>
-              <th className="px-4 py-2 border-b">DOB</th>
-              <th className="px-4 py-2 border-b">Status</th>
-              <th className="px-4 py-2 border-b text-center">Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {paginatedUsers.map((user) => (
-              <tr
-                key={user.id}
-                className="border-t hover:bg-gray-50 dark:hover:bg-gray-800"
-              >
-                <td className="px-4 py-2">{user.name}</td>
-                <td className="px-4 py-2">{user.email}</td>
-                <td className="px-4 py-2">
-                  {user.phone?.split("x")[0].trim()}
-                </td>
-                <td className="px-4 py-2">
-                  {user.dob
-                    ? new Date(user.dob).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "2-digit",
-                      })
-                    : "-"}
-                </td>
-
-                <td className="px-4 py-2">
-                  {user.status ? (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs text-green-600 bg-green-100 rounded dark:bg-green-800 dark:text-green-300">
-                      <CircleCheck className="w-4 h-4" />
-                      Active
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs text-red-600 bg-red-100 rounded dark:bg-red-800 dark:text-red-300">
-                      <CircleX className="w-4 h-4" />
-                      Inactive
-                    </span>
-                  )}
-                </td>
-
-                <td className="px-4 flex py-2 text-center space-x-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => {
-                      setSelectedUser(user);
-                      setModalType("view");
-                    }}
-                  >
-                    <Eye className="w-4 h-4 text-green-600" />
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => {
-                      setSelectedUser(user);
-                      setModalType("edit");
-                    }}
-                  >
-                    <Pencil className="w-4 h-4 text-blue-600" />
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => {
-                      setSelectedUser(user);
-                      setModalType("delete");
-                    }}
-                  >
-                    <Trash className="w-4 h-4 text-red-600" />
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* Table Box (bordered) */}
+      <div className="border block rounded-md dark:border-gray-700 w-full">
+        {/* Horizontal Scroll Only for Table Content */}
+        <div className="overflow-x-auto block  w-full">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Phone</TableHead>
+                <TableHead>DOB</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="text-center">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {paginatedUsers.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.phone?.split("x")[0].trim()}</TableCell>
+                  <TableCell>
+                    {user.dob
+                      ? new Date(user.dob).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "2-digit",
+                        })
+                      : "-"}
+                  </TableCell>
+                  <TableCell>
+                    {user.status ? (
+                      <span className="inline-flex items-center gap-1 px-2 py-1 text-xs text-green-600 bg-green-100 rounded dark:bg-green-800 dark:text-green-300">
+                        <CircleCheck className="w-4 h-4" />
+                        Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2 py-1 text-xs text-red-600 bg-red-100 rounded dark:bg-red-800 dark:text-red-300">
+                        <CircleX className="w-4 h-4" />
+                        Inactive
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell className="text-center space-x-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setModalType("view");
+                      }}
+                    >
+                      <Eye className="w-4 h-4 text-green-600" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setModalType("edit");
+                      }}
+                    >
+                      <Pencil className="w-4 h-4 text-blue-600" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => {
+                        setSelectedUser(user);
+                        setModalType("delete");
+                      }}
+                    >
+                      <Trash className="w-4 h-4 text-red-600" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
 
-      <div className="flex justify-center items-center gap-2 mt-4">
+      {/* Pagination */}
+      <div className="flex justify-center items-center gap-2">
         <Button
           variant="outline"
           size="sm"
@@ -158,6 +161,7 @@ const UserTable = () => {
         </Button>
       </div>
 
+      {/* Modals */}
       {modalType === "edit" && (
         <UserFormModal user={selectedUser} onClose={() => setModalType(null)} />
       )}
