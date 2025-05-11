@@ -33,7 +33,9 @@ const UserTable = () => {
   return (
     <div className="overflow-x-auto">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Users</h2>
+        <span className="text-xl font-bold text-gray-800 dark:text-white">
+          User Management
+        </span>
         <Button
           onClick={() => {
             setSelectedUser(null);

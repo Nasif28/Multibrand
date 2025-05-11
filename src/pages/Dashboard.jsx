@@ -18,11 +18,17 @@ const Dashboard = () => {
   if (isLoading) return <p>Loading dashboard...</p>;
 
   return (
-    <div className="grid gap-3 md:grid-cols-2">
-      <UsersByYearBarChart users={users} />
-      <UserStatusPieChart users={users} />
-      <EmailDomainDonutChart users={users} />
-      <UserTrendLineChart users={users} />
+    <div>
+      <span className="text-lg font-bold text-gray-800 dark:text-white">
+        Dashboard
+      </span>
+
+      <div className="grid gap-3 md:grid-cols-2">
+        <UsersByYearBarChart users={users} />
+        <UserStatusPieChart users={users} />
+        <EmailDomainDonutChart users={users} />
+        <UserTrendLineChart users={users} />
+      </div>
     </div>
   );
 };
