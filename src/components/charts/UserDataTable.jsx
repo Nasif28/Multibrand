@@ -11,7 +11,7 @@ import {
 import { Button } from "../ui/button";
 import { CircleCheck, CircleX, Eye, Pencil, Trash } from "lucide-react";
 
-const UserDataTable = ({ users }) => {
+const UserDataTable = ({ users, setSelectedUser, setModalType }) => {
   return (
     <Card className="relative">
       <CardHeader>
@@ -21,8 +21,6 @@ const UserDataTable = ({ users }) => {
       <CardContent className="h-[300px] overflow-hidden p-0 relative">
         <div className="relative h-full w-full overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
           <div className="min-w-[1000px] w-max relative ">
-            {" "}
-            {/* Add right padding for sticky Actions */}
             <table className="text-sm w-full border-separate border-spacing-0">
               <thead className="sticky top-0 z-20 bg-white dark:bg-gray-900 shadow">
                 <tr>
@@ -75,14 +73,36 @@ const UserDataTable = ({ users }) => {
                         </span>
                       )}
                     </td>
+
                     <td className="px-4 py-2 border-t text-center sticky right-0 bg-white dark:bg-gray-900 z-10 space-x-2 min-w-[120px]">
-                      <Button variant="outline" size="icon">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => {
+                          setSelectedUser(user);
+                          setModalType("view");
+                        }}
+                      >
                         <Eye className="w-4 h-4 text-green-600" />
                       </Button>
-                      <Button variant="outline" size="icon">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => {
+                          setSelectedUser(user);
+                          setModalType("edit");
+                        }}
+                      >
                         <Pencil className="w-4 h-4 text-blue-600" />
                       </Button>
-                      <Button variant="outline" size="icon">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => {
+                          setSelectedUser(user);
+                          setModalType("delete");
+                        }}
+                      >
                         <Trash className="w-4 h-4 text-red-600" />
                       </Button>
                     </td>
