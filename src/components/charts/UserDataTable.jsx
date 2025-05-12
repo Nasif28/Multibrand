@@ -13,14 +13,16 @@ import { CircleCheck, CircleX, Eye, Pencil, Trash } from "lucide-react";
 
 const UserDataTable = ({ users, setSelectedUser, setModalType }) => {
   return (
-    <Card className="relative">
+  <div className="w-full overflow-x-auto">
+     <Card className="relative">
       <CardHeader>
         <CardTitle>All Users</CardTitle>
       </CardHeader>
 
       <CardContent className="h-[300px] overflow-hidden p-0 relative">
         <div className="relative h-full w-full overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
-          <div className="min-w-[1000px] w-max relative ">
+<div className="min-w-[1000px] w-max relative">
+
             <table className="text-sm w-full border-separate border-spacing-0">
               <thead className="sticky top-0 z-20 bg-white dark:bg-gray-900 shadow">
                 <tr>
@@ -114,6 +116,7 @@ const UserDataTable = ({ users, setSelectedUser, setModalType }) => {
         </div>
       </CardContent>
     </Card>
+   </div>
   );
 };
 
