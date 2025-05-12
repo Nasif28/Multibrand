@@ -76,7 +76,7 @@ const UserDataTable = ({ users, setSelectedUser, setModalType }) => {
                       )}
                     </td>
 
-                    <td className="px-4 py-2 border-t text-center sticky right-0 bg-white dark:bg-gray-900 z-10 space-x-2 min-w-[120px]">
+                    <td className="px-4 py-2 border-t text-center sticky right-0 bg-white dark:bg-gray-900 z-10 space-x-1 min-w-[120px]">
                       <Button
                         variant="outline"
                         size="icon"
