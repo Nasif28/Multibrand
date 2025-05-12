@@ -1,4 +1,5 @@
 import EmailDomainDonutChart from "@/components/charts/EmailDomainDonutChart";
+import UserDataTable from "@/components/charts/UserDataTable";
 import UsersByYearBarChart from "@/components/charts/UsersByYearBarChart";
 import UserStatusPieChart from "@/components/charts/UserStatusPieChart";
 import UserTrendLineChart from "@/components/charts/UserTrendLineChart";
@@ -24,6 +25,7 @@ const Dashboard = () => {
       </span>
 
       <div className="grid gap-3 md:grid-cols-2">
+        <UserDataTable users={users} />
         <UsersByYearBarChart users={users} />
         <UserStatusPieChart users={users} />
         <EmailDomainDonutChart users={users} />

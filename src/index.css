@@ -119,6 +119,8 @@
   }
 }
 
+@plugin 'tailwind-scrollbar';
+
 .maxContainer {
   max-width: 1920px;
   margin: 0 auto;
@@ -133,3 +135,21 @@
 html {
   scroll-behavior: smooth;
 }
+/* 
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.8);
+} */
